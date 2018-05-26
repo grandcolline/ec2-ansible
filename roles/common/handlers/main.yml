@@ -1,0 +1,6 @@
+---
+- name: restart crond
+  become: true
+  ignore_errors: true
+  service: name=crond state=restarted
+

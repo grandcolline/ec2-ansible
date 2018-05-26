@@ -1,0 +1,21 @@
+---
+- name: Change timezone & lang
+  become: yes
+  shell: >
+    mv /etc/localtime /etc/localtime.org
+    && cp -f /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+    && sed -r -i 's;ZONE=".+";ZONE="Asia/Tokyo";' /etc/sysconfig/clock
+    && sed -r -i 's;LANG=(.+);LANG=ja_JP.UTF-8;' /etc/sysconfig/i18n
+  args:
+    executable: /bin/bash
+    creates: /etc/localtime.org
+  notify: restart crond
+
+- name: Update yum packages
+  become: yes
+  yum:
+    name: '*'
+    state: latest
+    update_cache: yes
+
+
