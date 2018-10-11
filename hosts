@@ -1,3 +1,5 @@
 [site]
 
+[site:vars]
+SWAP_SIZE=512
 

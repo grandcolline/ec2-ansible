@@ -1,0 +1,14 @@
+- name: Setting
+  shell: dd if=/dev/zero of=/swap.extended bs=1M count={{ SWAP_SIZE }}
+  tags:
+    - always
+
+- name: Create
+  shell: mkswap /swap.extended
+  tags:
+    - always
+
+- name: Active
+  shell: swapon /swap.extended
+  tags:
+    - always
