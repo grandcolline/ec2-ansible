@@ -2,4 +2,5 @@
 
 [site:vars]
 SWAP_SIZE=512
+DOCKER_COMPSE_VERSION=1.22.0
 
