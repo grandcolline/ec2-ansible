@@ -1,6 +1,6 @@
 ---
 - name: SWAP用ファイルの作成
-  shell: dd if=/dev/zero of=/swap.extended bs=1M count={{ SWAP.SIZE }}
+  shell: dd if=/dev/zero of=/swap.extended bs=1M count={{ SWAP_SIZE }}
   become: yes
   args:
     creates: /swap.extended
