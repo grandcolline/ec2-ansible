@@ -1,0 +1,22 @@
+---
+- name: sysctlの設定
+  sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    state: present
+    ignoreerrors: yes
+  become: yes
+  with_items:
+    - name: net.core.somaxconn
+      value: "{{ SYSCTL_NET_CORE_SOMAXCONN }}"
+    - name: net.ipv4.tcp_max_syn_backlog
+      value: "{{ SYSCTL_NET_IPV4_TCP_MAX_SYN_BACKLOG }}"
+    - name: net.core.netdev_max_backlog
+      value: "{{ SYSCTL_NET_CORE_NETDEV_MAX_BACKLOG }}"
+    - name: net.ipv4.ip_local_port_range
+      value: "{{ SYSCTL_NET_IPV4_IP_LOCAL_PORT_RANGE }}"
+    - name: fs.file-max
+      value: "{{ SYSCTL_FS_FILE_MAX }}"
+    - name: vm.max_map_count
+      value: "{{ SYSCTL_VM_MAX_MAP_COUNT }}"
+

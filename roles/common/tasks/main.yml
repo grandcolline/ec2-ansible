@@ -1,5 +1,5 @@
 ---
-- name: Change timezone & lang
+- name: タイムゾーン変更
   become: yes
   shell: >
     mv /etc/localtime /etc/localtime.org
@@ -11,7 +11,7 @@
     creates: /etc/localtime.org
   notify: restart crond
 
-- name: Update yum packages
+- name: yumアップデート
   become: yes
   yum:
     name: '*'

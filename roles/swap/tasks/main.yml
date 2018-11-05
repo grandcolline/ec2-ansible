@@ -1,14 +1,17 @@
-- name: Setting
-  shell: dd if=/dev/zero of=/swap.extended bs=1M count={{ SWAP_SIZE }}
-  tags:
-    - always
+---
+- name: SWAP用ファイルの作成
+  shell: dd if=/dev/zero of=/swap.extended bs=1M count={{ SWAP.SIZE }}
+  become: yes
+  args:
+    creates: /swap.extended
+  register: result
 
-- name: Create
+- name: ファイルをSWAP化
   shell: mkswap /swap.extended
-  tags:
-    - always
+  become: yes
+  when: result is changed
 
-- name: Active
+- name: SWAP領域として有効化
   shell: swapon /swap.extended
-  tags:
-    - always
+  become: yes
+  when: result is changed
