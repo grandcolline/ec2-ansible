@@ -6,6 +6,12 @@
     creates: /swap.extended
   register: result
 
+- name: ファイルの権限変更
+  file:
+    path: /swap.extended
+    mode: '0600'
+  become: yes
+
 - name: ファイルをSWAP化
   shell: mkswap /swap.extended
   become: yes
@@ -15,3 +21,13 @@
   shell: swapon /swap.extended
   become: yes
   when: result is changed
+
+- name: swapをマウントする
+  mount:
+    name: swap
+    src: /swap.extended
+    fstype: swap
+    opts: defaults
+    passno: '0'
+    dump: '0'
+    state: present

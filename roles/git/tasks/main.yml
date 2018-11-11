@@ -1,0 +1,6 @@
+---
+- name: gitインストール
+  become: yes
+  yum:
+    name='git'
+    state=latest
